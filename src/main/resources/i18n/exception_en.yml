@@ -1,0 +1,7 @@
+unKnown:
+  code: "-9999"
+  msg: "Unknown error"
+
+memberNotFound:
+  code: "-1000"
+  msg: "Member could not be found."

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -29,16 +30,18 @@ public class ExceptionAdvice {
         return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
     }
 
-    @ExceptionHandler(Exception.class)
+    // 알 수 없는 에러
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public CommonResult defaultException(HttpServletRequest request, Exception e){
+    @ExceptionHandler(Exception.class)
+    public CommonResult defaultException(HttpServletRequest request, Exception e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("unKnown.code")), e.getMessage());
     }
 
     // 사용자를 찾을 수 없습니다.
-    @ExceptionHandler(MemberNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public CommonResult userNotFoundException(HttpServletRequest request, MemberNotFoundException e){
+    @ExceptionHandler(MemberNotFoundException.class)
+    public CommonResult userNotFoundException(HttpServletRequest request, MemberNotFoundException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("memberNotFound.code")), getMessage("memberNotFound.msg"));
     }
+
 }

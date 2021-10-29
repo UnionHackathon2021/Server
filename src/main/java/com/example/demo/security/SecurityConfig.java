@@ -1,5 +1,7 @@
 package com.example.demo.security;
 
+import com.example.demo.exception_advice.handler.CustomAccessDeniedHandler;
+import com.example.demo.exception_advice.handler.CustomAuthenticationEntryPointHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,8 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll()
                 .antMatchers("/h2-console/**/**").permitAll()
                 .antMatchers("/exception/**").permitAll()
+//                .antMatchers("/v1/test").authenticated()
+
                 // Disallow everything else..
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+
+                .and()
+                .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler()).and()
+                .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPointHandler());
     }
 
     @Override

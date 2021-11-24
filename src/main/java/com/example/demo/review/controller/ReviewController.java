@@ -1,7 +1,7 @@
 package com.example.demo.review.controller;
 
-import com.example.demo.review.dto.ReviewRequest;
-import com.example.demo.review.dto.ReviewResponse;
+import com.example.demo.review.dto.request.ReviewRequest;
+import com.example.demo.review.dto.response.ReviewListResponse;
 import com.example.demo.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +13,8 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @GetMapping("/{reviewId}")
-    public ReviewResponse getReview(@PathVariable long reviewId) {
+    @GetMapping
+    public ReviewListResponse getReview() {
         return reviewService.getReview();
     }
 

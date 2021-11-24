@@ -1,10 +1,10 @@
 server:
-port: 8080
+  port: 8080
 
-servlet:
-  ### UTF-8 ###
-  encoding:
-    force: true # UTF-8이 SpringBoot 2.x.x 에서는 기본이다.
+  servlet:
+    ### UTF-8 ###
+    encoding:
+      force: true # UTF-8이 SpringBoot 2.x.x 에서는 기본이다.
 
 spring:
   ### DB 설정 ###

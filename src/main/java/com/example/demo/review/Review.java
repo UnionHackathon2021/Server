@@ -21,6 +21,9 @@ public class Review {
     @Column(name = "review_content")
     private String content;
 
+    @Column(name = "sentiment")
+    private String sentiment;
+
     @Column(name = "review_positive")
     private float positive;
 

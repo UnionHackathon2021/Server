@@ -12,6 +12,6 @@ public class TestController {
     @GetMapping("/test")
     public String test() {
 //        throw new MemberNotFoundException();
-        return "Test";
+        return "Hello World!";
     }
 }

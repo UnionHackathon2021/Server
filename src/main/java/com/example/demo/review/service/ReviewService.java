@@ -49,9 +49,9 @@ public class ReviewService {
                         .negative(toPercent(review.getNegative()))
                         .neutral(toPercent(review.getNeutral()))
                         .build()).collect(Collectors.toList()))
-                .totalNegative(size != 0 ? toPercent((float) negativeSize/size) : 0)
-                .totalNeutral(size != 0 ? toPercent((float) neutralSize/size) : 0)
-                .totalPositive(size != 0 ? toPercent((float) positiveSize/size) : 0)
+                .totalNegative(size != 0 ? toPercent((float) negativeSize/size * 100) : 0)
+                .totalNeutral(size != 0 ? toPercent((float) neutralSize/size * 100) : 0)
+                .totalPositive(size != 0 ? toPercent((float) positiveSize/size * 100) : 0)
                 .build();
     }
 
@@ -74,6 +74,8 @@ public class ReviewService {
         assert sentimentResponse != null;
 
         ConfidenceDto confidence = sentimentResponse.getDocument().getConfidence();
+
+        if ( confidence.getNegative() > 90) return;
 
         reviewRepository.save(Review.builder()
                 .content(request.getContent())

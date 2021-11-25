@@ -27,7 +27,7 @@ public class ChatController {
 
     @Value("${chatbot.secretKey}")
     private String secretKey;
-    @Value("chatbot.apiurl")
+    @Value("${chatbot.apiurl}")
     private String apiUrl;
 
     @MessageMapping("/chat.sendMessage")

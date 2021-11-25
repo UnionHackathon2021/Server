@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -20,13 +21,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
 
+
 @Controller
 public class ChatController {
 
-    @Value("chatbot.secretKey")
-    private static String secretKey;
-    @Value("chatbot.apiUrl")
-    private static String apiUrl;
+    @Value("${chatbot.secretKey}")
+    private String secretKey;
+    @Value("chatbot.apiurl")
+    private String apiUrl;
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")

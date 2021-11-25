@@ -13,20 +13,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final CorsFilter corsFilter;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         // Disable CSRF (cross site request forgery)
         http
+                .cors().disable()
                 .csrf().disable() // rest api이므로 기본설정 사용안함, 기본 설정은 비인증시 로그인 폼으로 리다이렉트
                 .httpBasic().disable(); //rest api, csrf보안이 필요없다.
 
@@ -46,8 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler()).and()
                 .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPointHandler());
-        http
-                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

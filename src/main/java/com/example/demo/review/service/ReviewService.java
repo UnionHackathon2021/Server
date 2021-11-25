@@ -49,9 +49,9 @@ public class ReviewService {
                         .negative(toPercent(review.getNegative()))
                         .neutral(toPercent(review.getNeutral()))
                         .build()).collect(Collectors.toList()))
-                .totalNegative(toPercent((float) negativeSize/size))
-                .totalNeutral(toPercent((float) neutralSize/size))
-                .totalPositive(toPercent((float) positiveSize/size))
+                .totalNegative(size != 0 ? toPercent((float) negativeSize/size) : 0)
+                .totalNeutral(size != 0 ? toPercent((float) neutralSize/size) : 0)
+                .totalPositive(size != 0 ? toPercent((float) positiveSize/size) : 0)
                 .build();
     }
 

@@ -29,7 +29,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors
                 .basePackage("com.example.demo"))
-                .paths(PathSelectors.ant("/v1/**"))
+                .paths(PathSelectors.ant("/review/**"))
                 .build();
     }
 }
